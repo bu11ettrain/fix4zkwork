@@ -6,12 +6,12 @@ source /hive/miners/custom/aleo_prover/aleo_prover.conf
 logPart=$(tail -n 50 ${CUSTOM_LOG_BASENAME}.log)
 
 #################################################################################################################################################
-#The main reason of error like "an illegal memory access was encountered" is too high OC. It's ok.
+#The main reason of error like "an illegal memory access was encountered" and other is too high OC. It's ok.
 #But you need to fix error handling inside miner (you just need to implement correct an exception handling and stop miner instead of send error message continously).
 #Since miner is not open sourced all what I can do to prevent RAM\HDD overflowing and freezeing - to grab the error message from logs and restart miner.
 #This small fix does its job pretty well though. :)
 
-[[ -n $(echo "$logPart" | grep "an illegal memory access was encountered") ]] && \
+[[ -n $(echo "$logPart" | grep "Failed find valid proof target in range") ]] && \
 
 #This part is optional. It just saves BUSID of faulted GPUs to the logfile for further OC adjusting.
 echo -e "\n$(date +"%Y-%m-%d %H:%M:%S") GPU FAULT" >> /home/user/gpu_fault.log && \
@@ -52,6 +52,7 @@ bus_numbers=$(printf '%s\n' "${busid_arr[@]}"  | jq -cs '.')
 fan_json=$(printf '%s\n' "${fan_arr[@]}"  | jq -cs '.')
 temp_json=$(printf '%s\n' "${temp_arr[@]}"  | jq -cs '.')
 uptime=$(( `date +%s` - `stat -c %Y $CUSTOM_CONFIG_FILENAME` ))
+#I think it's better to implement accepted shares counter in miner's output and parse it as GPU indexes and hashrates. 
 ac=$(grep -i 'found a solution' "${CUSTOM_LOG_BASENAME}.log" | wc -l)
 rj=0
 hs_units="hs"
