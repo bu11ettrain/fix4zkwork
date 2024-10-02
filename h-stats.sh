@@ -9,7 +9,6 @@ logPart=`tail -n 50 ${CUSTOM_LOG_BASENAME}.log`
 #Since miner is not open sourced it's all what I can do to prevent RAM\HDD overflowing and freezeing.											
 #This small fix does its job pretty well though. :)																							
 #################################################################################################################################################
-#[[ -n $(tail -n 10 "${CUSTOM_LOG_BASENAME}.log" | grep "an illegal memory access was encountered") ]] && \		
 [[ -n $(echo "$logPart" | grep "an illegal memory access was encountered") ]] && \
 rm -f /run/hive/miner.1 && \
 /hive/bin/miner restart && \
@@ -23,7 +22,7 @@ gpu_stats_nvidia=$(jq '[.brand, .temp, .fan, .busids] | transpose | map(select(.
 busids=($(jq -r '.[3][]' <<< "$gpu_stats_nvidia"))
 temps=($(jq -r '.[1][]' <<< "$gpu_stats_nvidia"))
 fans=($(jq -r '.[2][]' <<< "$gpu_stats_nvidia"))
-gpu_count=${#busids[@]}
+#gpu_count=${#busids[@]}
 
 hash_arr=()
 busid_arr=()
