@@ -79,7 +79,6 @@ stats=$(jq -nc \
 
 echo Debug info:
 echo Log file : $CUSTOM_LOG_BASENAME.log
-echo Raw stats : $stats_raw
 echo KHS : $khs
 echo AC \ RJ: $ac \ $rj
 echo Output : $stats
