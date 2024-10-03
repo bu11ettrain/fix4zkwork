@@ -32,7 +32,6 @@ hash_arr=()
 busid_arr=()
 fan_arr=()
 temp_arr=()
-lines=()
 
 miner_stats=$(echo "$logPart" | sed -n '/gpu\[0\]/,/gpu\[\*\]/p' | head -n -1 | tac | awk '/gpu\[\*]/{exit} {print}' | tac)
 while read -r string; do
