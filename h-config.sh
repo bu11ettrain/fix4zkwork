@@ -47,15 +47,15 @@ conf+="\n"
 
 USER_CONFIG=""
 if [[ ! -z $CUSTOM_USER_CONFIG ]]; then
-	while IFS= read -r line; do
-	    [[ -z $line ]] && continue
-	    if [[ ${line:0:7} == "nvtool " ]]; then
-	        eval "$line"
-	    else
-	        USER_CONFIG+="$line"$'\n'
-	    fi
-	done <<< "$CUSTOM_USER_CONFIG"
-	USER_CONFIG=$(echo "$USER_CONFIG" | tr '\n' ' ' | sed 's/[[:space:]]*$//')
+    while IFS= read -r line; do
+        [[ -z $line ]] && continue
+        if [[ ${line:0:7} == "nvtool " ]]; then
+            eval "$line"
+        else
+            USER_CONFIG+="$line"$'\n'
+        fi
+    done <<< "$CUSTOM_USER_CONFIG"
+    USER_CONFIG=$(echo "$USER_CONFIG" | tr '\n' ' ' | sed 's/[[:space:]]*$//')
     conf+="CUSTOM_USER_CONFIG=\""
     conf+="$USER_CONFIG\""
 fi
