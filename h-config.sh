@@ -44,8 +44,9 @@ fi
 
 conf+="\n"
 
-if [[ ! -z $CUSTOM_USER_CONFIG ]]; then                                                                                                        
-    conf+="CUSTOM_USER_CONFIG=\""                                                                                                                      
+if [[ ! -z $CUSTOM_USER_CONFIG ]]; then
+    CUSTOM_USER_CONFIG=$(echo "$CUSTOM_USER_CONFIG" | tr '\n' ' ')
+    conf+="CUSTOM_USER_CONFIG=\""
     conf+="$CUSTOM_USER_CONFIG\""
 fi
 
