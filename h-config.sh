@@ -62,6 +62,13 @@ fi
 
 conf+="\n"
 
+if [[ ! -z $CUSTOM_LOG_BASEDIR ]]; then
+    conf+="CUSTOM_LOG_BASEDIR="
+    conf+=$CUSTOM_LOG_BASEDIR
+fi
+
+conf+="\n"
+
 if [[ ! -z $CUSTOM_LOG_BASENAME ]]; then
     conf+="CUSTOM_LOG_BASENAME="
     conf+=$CUSTOM_LOG_BASENAME
